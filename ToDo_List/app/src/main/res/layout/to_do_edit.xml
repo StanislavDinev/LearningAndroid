@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/title"
+        android:inputType="text"
+        android:maxLength="25"
+        android:textAlignment="center"
+        android:textColorHint="@color/colorLightBlue"
+        android:textCursorDrawable="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/description"
+        android:inputType="text"
+        android:maxLines="5"
+        android:textAlignment="center"
+        android:textColorHint="@color/colorLightBlue"
+        android:textCursorDrawable="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/date"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightBlue"
+        android:textCursorDrawable="@color/colorPrimary"
+        android:textSize="16sp" />
+
+    <!--<DatePicker-->
+    <!--android:id="@+id/date_picker"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:calendarViewShown="false"-->
+    <!--android:clickable="true"-->
+    <!--android:contextClickable="false"-->
+    <!--android:datePickerMode="spinner"-->
+    <!--android:focusable="true">-->
+
+    <!--</DatePicker>-->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/save"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>
