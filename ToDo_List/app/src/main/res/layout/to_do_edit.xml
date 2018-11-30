@@ -44,17 +44,6 @@
         android:textCursorDrawable="@color/colorPrimary"
         android:textSize="16sp" />
 
-    <!--<DatePicker-->
-    <!--android:id="@+id/date_picker"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:calendarViewShown="false"-->
-    <!--android:clickable="true"-->
-    <!--android:contextClickable="false"-->
-    <!--android:datePickerMode="spinner"-->
-    <!--android:focusable="true">-->
-
-    <!--</DatePicker>-->
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
