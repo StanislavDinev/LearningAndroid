@@ -63,7 +63,7 @@ public class OpenToDoFragment extends BaseFragment {
         title = view.findViewById(R.id.title);
         description = view.findViewById(R.id.description);
         date = view.findViewById(R.id.date);
-        if(id >= 0) {
+        if (id >= 0) {
             setupEditText(toDoElement);
         }
 
@@ -102,11 +102,11 @@ public class OpenToDoFragment extends BaseFragment {
 
     private void setupEditText(ToDoElement toDoElement) {
         title.setText(toDoElement.getTitle());
-        if(toDoElement.getDescription() != null) {
+        if (toDoElement.getDescription() != null) {
             description.setText(toDoElement.getDescription());
         }
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
-        if(toDoElement.getDate() != 0) {
+        if (toDoElement.getDate() != 0) {
             date.setText(f.format(toDoElement.getDate()));
         }
     }
@@ -116,7 +116,7 @@ public class OpenToDoFragment extends BaseFragment {
         setHasOptionsMenu(true);
         android.support.v7.app.ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        if(id >= 0) {
+        if (id >= 0) {
             actionBar.setTitle(R.string.edit_fragment_title);
         } else {
             actionBar.setTitle(R.string.add_fragment_title);
@@ -130,7 +130,9 @@ public class OpenToDoFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.edit_fragment_action_bar, menu);
+        if (id >= 0) {
+            inflater.inflate(R.menu.edit_fragment_action_bar, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -157,7 +159,7 @@ public class OpenToDoFragment extends BaseFragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(id >= 0) {
+                if (id >= 0) {
                     onEditButtonClick();
                 } else {
                     onAddButtonClick();
