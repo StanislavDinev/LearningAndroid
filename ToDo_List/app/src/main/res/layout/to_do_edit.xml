@@ -21,7 +21,6 @@
             android:layout_marginRight="@dimen/small"
             android:layout_marginTop="@dimen/large"
             android:hint="@string/title"
-            android:maxLength="25"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -55,7 +54,7 @@
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorPrimary"
             android:textCursorDrawable="@color/colorPrimary"
-            android:textSize="@dimen/medium_text"
+            android:textSize="@dimen/sp_18"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description" />
