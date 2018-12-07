@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="EditTextPrimary">
+        <item name="android:gravity">center</item>
+        <item name="android:textColorHint">@color/lightColor</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textCursorDrawable">@color/colorPrimary</item>
+    </style>
+
+    <style name="ButtonPrimaryStyle">
+        <item name="android:background">@drawable/rounded_edges_shape</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/large_text</item>
+    </style>
+
 </resources>

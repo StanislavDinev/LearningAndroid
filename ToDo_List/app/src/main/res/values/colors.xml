@@ -7,4 +7,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPink">#FF4081</color>
+    <color name="lightColor">#C5CAE9</color>
 </resources>

@@ -48,7 +48,6 @@ public class ToDoFragment extends BaseFragment implements ItemAdapter.Listener {
     }
 
 
-
     @Override
     public void onToDoClick(ToDoElement item) {
         ((MainActivity) getActivity()).setFragmentAndAddToBackStack(OpenToDoFragment.newInstance(item.getId()));

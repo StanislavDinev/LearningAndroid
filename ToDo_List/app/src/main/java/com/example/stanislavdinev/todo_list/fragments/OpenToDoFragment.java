@@ -164,6 +164,7 @@ public class OpenToDoFragment extends BaseFragment {
                 } else {
                     onAddButtonClick();
                 }
+
             }
         });
     }
@@ -185,6 +186,7 @@ public class OpenToDoFragment extends BaseFragment {
             toDoElement.setDate(dateInMiliS);
             TodoApp.getInstance().getDataManager().edit(toDoElement);
             Toast.makeText(getActivity(), R.string.save_message, Toast.LENGTH_LONG).show();
+            ((MainActivity) getActivity()).setFragment(new ToDoFragment());
         }
     }
 
@@ -207,6 +209,7 @@ public class OpenToDoFragment extends BaseFragment {
             date.setText("");
             IdGenerator.incrementID();
             dateInMiliS = 0;
+            ((MainActivity) getActivity()).setFragment(new ToDoFragment());
         }
     }
 
