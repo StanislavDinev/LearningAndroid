@@ -18,16 +18,16 @@ import com.example.stanislavdinev.todo_list.TodoApp;
 import com.example.stanislavdinev.todo_list.MainActivity;
 import com.example.stanislavdinev.todo_list.R;
 import com.example.stanislavdinev.todo_list.data.ToDoElement;
-import com.example.stanislavdinev.todo_list.utils.IdGenerator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class OpenToDoFragment extends BaseFragment {
-    long dateInMiliS;
+    long dateInMilliS;
     private static final int CONSTANT_NEGATIVE_VALUE = -1;
     private static final String ARG_ID = "ARG_ID";
     int id = CONSTANT_NEGATIVE_VALUE;
@@ -59,7 +59,6 @@ public class OpenToDoFragment extends BaseFragment {
             id = getArguments().getInt(ARG_ID);
         }
         ToDoElement toDoElement = TodoApp.getInstance().getDataManager().getItemById(id);
-
         title = view.findViewById(R.id.title);
         description = view.findViewById(R.id.description);
         date = view.findViewById(R.id.date);
@@ -89,7 +88,7 @@ public class OpenToDoFragment extends BaseFragment {
                 SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
                 try {
                     Date d = f.parse(date.getText().toString());
-                    dateInMiliS = d.getTime();
+                    dateInMilliS = d.getTime();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -164,7 +163,6 @@ public class OpenToDoFragment extends BaseFragment {
                 } else {
                     onAddButtonClick();
                 }
-
             }
         });
     }
@@ -173,7 +171,7 @@ public class OpenToDoFragment extends BaseFragment {
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         try {
             Date d = f.parse(date.getText().toString());
-            dateInMiliS = d.getTime();
+            dateInMilliS = d.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -181,12 +179,13 @@ public class OpenToDoFragment extends BaseFragment {
             Toast.makeText(getActivity(), R.string.no_title, Toast.LENGTH_LONG).show();
         } else {
             ToDoElement toDoElement = TodoApp.getInstance().getDataManager().getItemById(id);
+            toDoElement.setId(id);
             toDoElement.setTitle(title.getText().toString());
             toDoElement.setDescription(description.getText().toString());
-            toDoElement.setDate(dateInMiliS);
+            toDoElement.setDate(dateInMilliS);
             TodoApp.getInstance().getDataManager().edit(toDoElement);
             Toast.makeText(getActivity(), R.string.save_message, Toast.LENGTH_LONG).show();
-            ((MainActivity) getActivity()).setFragment(new ToDoFragment());
+            getActivity().onBackPressed();
         }
     }
 
@@ -194,22 +193,21 @@ public class OpenToDoFragment extends BaseFragment {
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         try {
             Date d = f.parse(date.getText().toString());
-            dateInMiliS = d.getTime();
+            dateInMilliS = d.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         if (title.getText().toString().equals("")) {
             Toast.makeText(getActivity(), R.string.no_title, Toast.LENGTH_LONG).show();
         } else {
-            ToDoElement toDoElement = new ToDoElement(IdGenerator.getId(), title.getText().toString()
-                    , dateInMiliS, description.getText().toString());
+            ToDoElement toDoElement = new ToDoElement(title.getText().toString()
+                    , dateInMilliS, description.getText().toString());
             TodoApp.getInstance().getDataManager().add(toDoElement);
             title.setText("");
             description.setText("");
             date.setText("");
-            IdGenerator.incrementID();
-            dateInMiliS = 0;
-            ((MainActivity) getActivity()).setFragment(new ToDoFragment());
+            dateInMilliS = 0;
+            getActivity().onBackPressed();
         }
     }
 

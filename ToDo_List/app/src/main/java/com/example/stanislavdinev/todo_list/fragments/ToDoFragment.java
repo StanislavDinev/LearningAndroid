@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.stanislavdinev.todo_list.ItemAdapter;
-import com.example.stanislavdinev.todo_list.data.DataManager;
+import com.example.stanislavdinev.todo_list.TodoApp;
 import com.example.stanislavdinev.todo_list.MainActivity;
 import com.example.stanislavdinev.todo_list.R;
 import com.example.stanislavdinev.todo_list.data.ToDoElement;
@@ -27,7 +27,7 @@ public class ToDoFragment extends BaseFragment implements ItemAdapter.Listener {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        itemAdapter = new ItemAdapter(DataManager.getInstance().myList, this);
+        itemAdapter = new ItemAdapter(TodoApp.getInstance().getDataManager().getAllToDos(), this);
         recyclerView.setAdapter(itemAdapter);
         FloatingActionButton fab = view.findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +37,6 @@ public class ToDoFragment extends BaseFragment implements ItemAdapter.Listener {
                         getActivity()).setFragmentAndAddToBackStack(OpenToDoFragment.newInstance());
             }
         });
-
     }
 
     @Override

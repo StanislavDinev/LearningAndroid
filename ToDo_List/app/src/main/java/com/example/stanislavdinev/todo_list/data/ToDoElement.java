@@ -17,6 +17,15 @@ public class ToDoElement {
         this.description = description;
     }
 
+    public ToDoElement() {
+    }
+
+    public ToDoElement(String title, long date, String description) {
+        this.title = title;
+        this.date = date;
+        this.description = description;
+    }
+
     public String getTitle() {
         return title;
     }

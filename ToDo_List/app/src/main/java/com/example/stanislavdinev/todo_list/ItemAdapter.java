@@ -33,7 +33,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.DataHolder> {
         TextView title, date, description;
 
 
-        public DataHolder(View view) {
+        private DataHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             date = view.findViewById(R.id.date);
