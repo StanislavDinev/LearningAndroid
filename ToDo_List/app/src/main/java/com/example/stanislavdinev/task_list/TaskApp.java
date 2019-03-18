@@ -2,14 +2,12 @@ package com.example.stanislavdinev.todo_list;
 
 import android.app.Application;
 
-import com.example.stanislavdinev.todo_list.data.DataManager;
 import com.example.stanislavdinev.todo_list.data.DataManagerContract;
 import com.example.stanislavdinev.todo_list.data.sqLite.DatabaseHelper;
-import com.example.stanislavdinev.todo_list.data.sqLite.DatabaseManager;
 
-public class TodoApp extends Application {
+public class TaskApp extends Application {
     private DataManagerContract dataManager;
-    private static TodoApp instance;
+    private static TaskApp instance;
     public void onCreate() {
         super.onCreate();
         dataManager = new DatabaseHelper(getApplicationContext());
@@ -20,7 +18,7 @@ public class TodoApp extends Application {
         return dataManager;
     }
 
-    public static TodoApp getInstance() {
+    public static TaskApp getInstance() {
         return instance;
     }
 }

@@ -2,25 +2,23 @@ package com.example.stanislavdinev.todo_list.data;
 
 
 
-public class ToDoElement {
-    // TODO introduce field id
+public class Task {
     private int id;
     private String title;
     private long date;
     private String description;
 
-    // TODO the date should be long
-    public ToDoElement(int id, String title, long date, String description) {
+    public Task(int id, String title, long date, String description) {
         this.id = id;
         this.title = title;
         this.date = date;
         this.description = description;
     }
 
-    public ToDoElement() {
+    public Task() {
     }
 
-    public ToDoElement(String title, long date, String description) {
+    public Task(String title, long date, String description) {
         this.title = title;
         this.date = date;
         this.description = description;

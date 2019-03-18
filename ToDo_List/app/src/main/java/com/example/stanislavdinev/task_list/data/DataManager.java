@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager implements DataManagerContract {
-    private static List<ToDoElement> myList;
+    private static List<Task> myList;
     private static DataManager instance = null;
 
     private DataManager() {
@@ -19,8 +19,8 @@ public class DataManager implements DataManagerContract {
     }
 
     @Override
-    public void add(ToDoElement toDoElement) {
-        myList.add(toDoElement);
+    public void add(Task task) {
+        myList.add(task);
     }
 
     @Override
@@ -33,16 +33,16 @@ public class DataManager implements DataManagerContract {
     }
 
     @Override
-    public void edit(ToDoElement toDoElement) {
+    public void edit(Task task) {
         for (int i = 0; i < myList.size(); i++) {
-            if (toDoElement.getId() == myList.get(i).getId()) {
-                myList.set(i, toDoElement);
+            if (task.getId() == myList.get(i).getId()) {
+                myList.set(i, task);
             }
         }
     }
 
     @Override
-    public ToDoElement getItemById(int id) {
+    public Task getItemById(int id) {
         for (int i = 0; i < myList.size(); i++) {
             if (myList.get(i).getId() == id) {
                 return myList.get(i);
@@ -52,7 +52,7 @@ public class DataManager implements DataManagerContract {
     }
 
     @Override
-    public List<ToDoElement> getAllToDos() {
+    public List<Task> getAllToDos() {
         return myList;
     }
 }

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.stanislavdinev.todo_list.fragments.ToDoFragment;
+import com.example.stanislavdinev.todo_list.fragments.TasksListFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setFragment(new ToDoFragment());
+        setFragment(new TasksListFragment());
     }
 
     public void setFragment(Fragment fragment) {

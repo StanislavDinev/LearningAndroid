@@ -6,13 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.stanislavdinev.todo_list.ItemAdapter;
+import com.example.stanislavdinev.todo_list.TaskAdapter;
 import com.example.stanislavdinev.todo_list.MainActivity;
-import com.example.stanislavdinev.todo_list.Presenters.ToDoPresenter;
+import com.example.stanislavdinev.todo_list.Presenters.TasksListPresenter;
 import com.example.stanislavdinev.todo_list.R;
-import com.example.stanislavdinev.todo_list.TodoApp;
+import com.example.stanislavdinev.todo_list.TaskApp;
 import com.example.stanislavdinev.todo_list.ViewContracts.TaskListView;
-import com.example.stanislavdinev.todo_list.data.TaskElement;
+import com.example.stanislavdinev.todo_list.data.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,13 @@ import java.util.List;
 import static android.view.View.VISIBLE;
 
 
-public class ToDoFragment extends BaseFragment implements ItemAdapter.Listener, TaskListView {
-    private ItemAdapter itemAdapter;
+public class TasksListFragment extends BaseFragment implements TaskAdapter.Listener, TaskListView {
+    private TaskAdapter taskAdapter;
     private View emptyLayout;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.task_list_fragment;
+        return R.layout.tasks_list_fragment;
     }
 
     @Override
@@ -34,37 +34,36 @@ public class ToDoFragment extends BaseFragment implements ItemAdapter.Listener, 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        itemAdapter = new ItemAdapter(new ArrayList<TaskElement>(), this);
-        recyclerView.setAdapter(itemAdapter);
+        taskAdapter = new TaskAdapter(new ArrayList<Task>(), this);
+        recyclerView.setAdapter(taskAdapter);
         emptyLayout = view.findViewById(R.id.empty_layout);
-
         FloatingActionButton fab = view.findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity)
-                        getActivity()).setFragmentAndAddToBackStack(OpenToDoFragment.newInstance());
+                        getActivity()).setFragmentAndAddToBackStack(OpenTaskFragment.newInstance());
             }
         });
-        ToDoPresenter toDoPresenter = new ToDoPresenter(this, TodoApp.getInstance().getDataManager());
-        toDoPresenter.loadTasks();
+        TasksListPresenter tasksListPresenter = new TasksListPresenter(this, TaskApp.getInstance().getDataManager());
+        tasksListPresenter.loadTasks();
     }
 
     @Override
     protected void setupToolbar() {
         android.support.v7.app.ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(R.string.to_do_fragment_title);
+        actionBar.setTitle(R.string.task_fragment_title);
     }
 
     @Override
-    public void onToDoClick(TaskElement item) {
-        ((MainActivity) getActivity()).setFragmentAndAddToBackStack(OpenToDoFragment.newInstance(item.getId()));
+    public void onTask(Task task) {
+        ((MainActivity) getActivity()).setFragmentAndAddToBackStack(OpenTaskFragment.newInstance(task.getId()));
     }
 
     @Override
-    public void setToDos(List<TaskElement> toDoList) {
-        itemAdapter.setTasks(toDoList);
+    public void setTasks(List<Task> taskList) {
+        taskAdapter.setTasks(taskList);
     }
 
     @Override

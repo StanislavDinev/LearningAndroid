@@ -8,25 +8,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.stanislavdinev.todo_list.data.ToDoElement;
+import com.example.stanislavdinev.todo_list.data.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.DataHolder> {
-    private List<ToDoElement> myList = new ArrayList<>();
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.DataHolder> {
+    private List<Task> tasks = new ArrayList<>();
     private Listener listener;
 
 
-    public ItemAdapter(List<ToDoElement> myList, Listener listener) {
-        this.myList.addAll(myList);
+    public TaskAdapter(List<Task> tasks, Listener listener) {
+        this.tasks.addAll(tasks);
         this.listener = listener;
     }
 
+    public void setTasks(List<Task> tasks) {
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
+        notifyDataSetChanged();
+    }
+
     public interface Listener {
-        void onToDoClick(ToDoElement item);
+        void onTask(Task item);
     }
 
     public class DataHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -44,32 +50,32 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.DataHolder> {
 
         @Override
         public void onClick(View view) {
-            ToDoElement item = myList.get(getAdapterPosition());
-            listener.onToDoClick(item);
+            Task item = tasks.get(getAdapterPosition());
+            listener.onTask(item);
         }
     }
 
     @NonNull
     @Override
-    public ItemAdapter.DataHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.to_do_row, viewGroup, false);
+    public TaskAdapter.DataHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.task_element, viewGroup, false);
         return new DataHolder(view);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull DataHolder dataHolder, int position) {
-        dataHolder.title.setText(myList.get(position).getTitle());
-        if (myList.get(position).getDate() != 0) {
+        dataHolder.title.setText(tasks.get(position).getTitle());
+        if (tasks.get(position).getDate() != 0) {
             SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
-            Long date = myList.get(position).getDate();
+            Long date = tasks.get(position).getDate();
             dataHolder.date.setText(f.format(date));
         }
-        dataHolder.description.setText(myList.get(position).getDescription());
+        dataHolder.description.setText(tasks.get(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return myList.size();
+        return tasks.size();
     }
 }
