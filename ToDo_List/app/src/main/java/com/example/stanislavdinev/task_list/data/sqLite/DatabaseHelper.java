@@ -1,4 +1,4 @@
-package com.example.stanislavdinev.todo_list.data.sqLite;
+package com.example.stanislavdinev.task_list.data.sqLite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,16 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.stanislavdinev.todo_list.data.DataManagerContract;
-import com.example.stanislavdinev.todo_list.data.Task;
+import com.example.stanislavdinev.task_list.data.DataManagerContract;
+import com.example.stanislavdinev.task_list.data.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements DataManagerContract {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "dbTODO";
-//Loaders
+    private static final String DATABASE_NAME = "dbTask";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -85,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements DataManagerContr
     }
 
     @Override
-    public Task getItemById(int id) {
+    public Task getTaskById(int id) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(DatabaseManager.TABLE_NAME,
                 new String[]{DatabaseManager.COLUMN_ID, DatabaseManager.COLUMN_TITLE, DatabaseManager.COLUMN_DESCRIPTION,
@@ -107,8 +106,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements DataManagerContr
     }
 
     @Override
-    public List<Task> getAllToDos() {
-        List<Task> listOfToDos = new ArrayList<>();
+    public List<Task> getAllTasks() {
+        List<Task> tasksList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + DatabaseManager.TABLE_NAME + " ORDER BY " + DatabaseManager.COLUMN_ID + " DESC";
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
@@ -119,11 +118,11 @@ public class DatabaseHelper extends SQLiteOpenHelper implements DataManagerContr
                 task.setTitle(cursor.getString(cursor.getColumnIndex(DatabaseManager.COLUMN_TITLE)));
                 task.setDescription(cursor.getString(cursor.getColumnIndex(DatabaseManager.COLUMN_DESCRIPTION)));
                 task.setDate(cursor.getLong(cursor.getColumnIndex(DatabaseManager.COLUMN_DATE)));
-                listOfToDos.add(task);
+                tasksList.add(task);
             } while (cursor.moveToNext());
         }
         cursor.close();
         sqLiteDatabase.close();
-        return listOfToDos;
+        return tasksList;
     }
 }

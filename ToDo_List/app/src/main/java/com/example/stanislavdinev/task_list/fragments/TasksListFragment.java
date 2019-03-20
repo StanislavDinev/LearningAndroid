@@ -1,4 +1,4 @@
-package com.example.stanislavdinev.todo_list.fragments;
+package com.example.stanislavdinev.task_list.fragments;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -6,13 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.stanislavdinev.todo_list.TaskAdapter;
-import com.example.stanislavdinev.todo_list.MainActivity;
-import com.example.stanislavdinev.todo_list.Presenters.TasksListPresenter;
-import com.example.stanislavdinev.todo_list.R;
-import com.example.stanislavdinev.todo_list.TaskApp;
-import com.example.stanislavdinev.todo_list.ViewContracts.TaskListView;
-import com.example.stanislavdinev.todo_list.data.Task;
+import com.example.stanislavdinev.task_list.TaskAdapter;
+import com.example.stanislavdinev.task_list.MainActivity;
+import com.example.stanislavdinev.task_list.Presenters.TasksListPresenter;
+import com.example.stanislavdinev.task_list.R;
+import com.example.stanislavdinev.task_list.TaskApp;
+import com.example.stanislavdinev.task_list.ViewContracts.TaskListView;
+import com.example.stanislavdinev.task_list.data.Task;
 
 import java.util.ArrayList;
 import java.util.List;

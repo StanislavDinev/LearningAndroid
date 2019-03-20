@@ -1,11 +1,11 @@
-package com.example.stanislavdinev.todo_list;
+package com.example.stanislavdinev.task_list;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.stanislavdinev.todo_list.fragments.TasksListFragment;
+import com.example.stanislavdinev.task_list.fragments.TasksListFragment;
 
 
 public class MainActivity extends AppCompatActivity {

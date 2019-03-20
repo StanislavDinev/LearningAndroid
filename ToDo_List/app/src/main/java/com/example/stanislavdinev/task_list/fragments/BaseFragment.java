@@ -1,4 +1,4 @@
-package com.example.stanislavdinev.todo_list.fragments;
+package com.example.stanislavdinev.task_list.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

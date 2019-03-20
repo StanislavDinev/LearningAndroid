@@ -1,4 +1,4 @@
-package com.example.stanislavdinev.todo_list;
+package com.example.stanislavdinev.task_list;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

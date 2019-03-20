@@ -1,4 +1,4 @@
-package com.example.stanislavdinev.todo_list.data;
+package com.example.stanislavdinev.task_list.data;
 
 import java.util.List;
 
@@ -6,6 +6,6 @@ public interface DataManagerContract {
     void add(Task task);
     void delete(int id);
     void edit(Task task);
-    Task getItemById(int id);
-    List<Task> getAllToDos();
+    Task getTaskById(int id);
+    List<Task> getAllTasks();
 }

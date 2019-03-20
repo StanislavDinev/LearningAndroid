@@ -1,17 +1,18 @@
 <resources>
-    <string name="app_name">ToDo_List</string>
+    <string name="app_name">Task_List</string>
     <string name="title">Set a Title</string>
     <string name="date">Set a Date</string>
     <string name="description">Set a Description</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
-    <string name="delete_button_hint">Delete the ToDo element</string>
-    <string name="no_title">"You need to give your ToDo a title!"</string>
+    <string name="delete_button_hint">Delete the Task.</string>
+    <string name="no_title">"You need to give your Task a title!"</string>
     <string name="add_fragment_title">Add screen</string>
     <string name="edit_fragment_title">Edit screen</string>
-    <string name="to_do_fragment_title">ToDo</string>
-    <string name="delete_query">Do you want to delete this todo?</string>
+    <string name="task_fragment_title">TaskList</string>
+    <string name="delete_query">Do you want to delete this task?</string>
     <string name="yes">Yes</string>
     <string name="no">no</string>
-    <string name="save_message">You have saved the todo!</string>
+    <string name="save_message">You have saved the task!</string>
+    <string name="no_tasks">There are no tasks to be done.</string>
 </resources>

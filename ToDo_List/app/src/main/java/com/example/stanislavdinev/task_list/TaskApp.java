@@ -1,9 +1,9 @@
-package com.example.stanislavdinev.todo_list;
+package com.example.stanislavdinev.task_list;
 
 import android.app.Application;
 
-import com.example.stanislavdinev.todo_list.data.DataManagerContract;
-import com.example.stanislavdinev.todo_list.data.sqLite.DatabaseHelper;
+import com.example.stanislavdinev.task_list.data.DataManagerContract;
+import com.example.stanislavdinev.task_list.data.sqLite.DatabaseHelper;
 
 public class TaskApp extends Application {
     private DataManagerContract dataManager;
