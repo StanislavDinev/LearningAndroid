@@ -2,20 +2,20 @@ package com.example.stanislavdinev.task_list;
 
 import android.app.Application;
 
-import com.example.stanislavdinev.task_list.data.DataManagerContract;
+import com.example.stanislavdinev.task_list.data.TaskDataManagerContract;
 import com.example.stanislavdinev.task_list.data.sqLite.DatabaseHelper;
 
 public class TaskApp extends Application {
-    private DataManagerContract dataManager;
+    private TaskDataManagerContract taskDataManager;
     private static TaskApp instance;
     public void onCreate() {
         super.onCreate();
-        dataManager = new DatabaseHelper(getApplicationContext());
+        taskDataManager = new DatabaseHelper(getApplicationContext());
         instance = this;
     }
 
-    public DataManagerContract getDataManager() {
-        return dataManager;
+    public TaskDataManagerContract getTaskDataManager() {
+        return taskDataManager;
     }
 
     public static TaskApp getInstance() {

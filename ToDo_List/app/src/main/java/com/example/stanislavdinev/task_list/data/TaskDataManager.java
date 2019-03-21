@@ -3,7 +3,7 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public class DataManager implements DataManagerContract {
+//public class DataManager implements TaskDataManagerContract {
 //    private static List<Task> taskList;
 //    private static DataManager instance = null;
 //

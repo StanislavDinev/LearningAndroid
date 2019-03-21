@@ -21,22 +21,20 @@ import com.example.stanislavdinev.task_list.R;
 import com.example.stanislavdinev.task_list.ViewContracts.OpenTaskView;
 import com.example.stanislavdinev.task_list.data.Task;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 
 public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
-    long dateInMilliS;
-    private static final int CONSTANT_NEGATIVE_VALUE = -1;
+    private static final int DEFAULT_NEGATIVE_VALUE = -1;
     private static final String ARG_ID = "ARG_ID";
-    int id = CONSTANT_NEGATIVE_VALUE;
+    private int id = DEFAULT_NEGATIVE_VALUE;
     private TextView mButton;
-    EditText title;
-    EditText description;
-    TextView date;
-    OpenTaskPresenter openTaskPresenter = new OpenTaskPresenter(this, TaskApp.getInstance().getDataManager());
+    private EditText taskTitle;
+    private EditText taskDescription;
+    private TextView taskDate;
+    private OpenTaskPresenter openTaskPresenter = new OpenTaskPresenter(this, TaskApp.getInstance().getTaskDataManager());
 
 
     public static OpenTaskFragment newInstance(int id) {
@@ -50,7 +48,7 @@ public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
 
 
     public static OpenTaskFragment newInstance() {
-        return newInstance(CONSTANT_NEGATIVE_VALUE);
+        return newInstance(DEFAULT_NEGATIVE_VALUE);
     }
 
 
@@ -59,12 +57,12 @@ public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
         if (getArguments() != null) {
             id = getArguments().getInt(ARG_ID);
         }
-        title = view.findViewById(R.id.title);
-        description = view.findViewById(R.id.description);
-        date = view.findViewById(R.id.date);
+        taskTitle = view.findViewById(R.id.title);
+        taskDescription = view.findViewById(R.id.description);
+        taskDate = view.findViewById(R.id.date);
         openTaskPresenter.setupEditText(id);
 
-        date.setOnClickListener(new View.OnClickListener() {
+        taskDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
@@ -77,35 +75,30 @@ public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year,
                                                   int month, int day) {
-                                date.setText(day + "."
+                                taskDate.setText(day + "."
                                         + (month + 1) + "." + year);
                             }
                         }, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
                 datePickerDialog.show();
-                SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
-                try {
-                    Date d = f.parse(date.getText().toString());
-                    dateInMilliS = d.getTime();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+
+                openTaskPresenter.parseDate(taskDate.getText().toString());
             }
         });
         mButton = view.findViewById(R.id.save_button);
-        mButton.setText(id >= 0 ? R.string.save : R.string.add);
+        mButton.setText(openTaskPresenter.isEditMode(id) ? R.string.save : R.string.add);
         onButtonClick();
     }
 
     @Override
     public void setupEditText(Task task) {
-        title.setText(task.getTitle());
+        taskTitle.setText(task.getTitle());
         if (task.getDescription() != null) {
-            description.setText(task.getDescription());
+            taskDescription.setText(task.getDescription());
         }
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         if (task.getDate() != 0) {
-            date.setText(f.format(task.getDate()));
+            taskDate.setText(f.format(task.getDate()));
         }
     }
 
@@ -114,7 +107,7 @@ public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
         setHasOptionsMenu(true);
         android.support.v7.app.ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        if (id >= 0) {
+        if (openTaskPresenter.isEditMode(id)) {
             actionBar.setTitle(R.string.edit_fragment_title);
         } else {
             actionBar.setTitle(R.string.add_fragment_title);
@@ -128,63 +121,21 @@ public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (id >= 0) {
+        if (openTaskPresenter.isEditMode(id)) {
             inflater.inflate(R.menu.edit_screen_action_bar, menu);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
 
-
     private void onButtonClick() {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openTaskPresenter.setButtons(id);
+                openTaskPresenter.onButtonClick(id, taskTitle.getText().toString(), taskDescription.getText().toString(), taskDate.getText().toString());
+                getActivity().onBackPressed();
             }
         });
-    }
-
-    @Override
-    public void onEdit() {
-        SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date d = f.parse(date.getText().toString());
-            dateInMilliS = d.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (title.getText().toString().equals("")) {
-            Toast.makeText(getActivity(), R.string.no_title, Toast.LENGTH_LONG).show();
-        } else {
-            Task task = TaskApp.getInstance().getDataManager().getTaskById(id);
-            task.setId(id);
-            task.setTitle(title.getText().toString());
-            task.setDescription(description.getText().toString());
-            task.setDate(dateInMilliS);
-            TaskApp.getInstance().getDataManager().edit(task);
-            Toast.makeText(getActivity(), R.string.save_message, Toast.LENGTH_LONG).show();
-            getActivity().onBackPressed();
-        }
-    }
-
-    @Override
-    public void onAdd() {
-        SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date d = f.parse(date.getText().toString());
-            dateInMilliS = d.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (title.getText().toString().equals("")) {
-            Toast.makeText(getActivity(), R.string.no_title, Toast.LENGTH_LONG).show();
-        } else {
-            Task task = new Task(title.getText().toString()
-                    , dateInMilliS, description.getText().toString());
-            TaskApp.getInstance().getDataManager().add(task);
-            getActivity().onBackPressed();
-        }
     }
 
     @Override
@@ -205,6 +156,10 @@ public class OpenTaskFragment extends BaseFragment implements OpenTaskView {
         }).show();
     }
 
+    @Override
+    public void showMessage(int message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,15 +1,15 @@
 package com.example.stanislavdinev.task_list.Presenters;
 
 import com.example.stanislavdinev.task_list.ViewContracts.TaskListView;
-import com.example.stanislavdinev.task_list.data.DataManagerContract;
+import com.example.stanislavdinev.task_list.data.TaskDataManagerContract;
 
 
 public class TasksListPresenter {
 
     private TaskListView view;
-    private DataManagerContract dataManager;
+    private TaskDataManagerContract dataManager;
 
-    public TasksListPresenter(TaskListView view, DataManagerContract dataManager) {
+    public TasksListPresenter(TaskListView view, TaskDataManagerContract dataManager) {
         this.view = view;
         this.dataManager = dataManager;
     }

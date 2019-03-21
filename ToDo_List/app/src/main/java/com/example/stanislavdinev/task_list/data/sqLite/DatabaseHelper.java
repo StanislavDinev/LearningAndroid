@@ -6,13 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.stanislavdinev.task_list.data.DataManagerContract;
+import com.example.stanislavdinev.task_list.data.TaskDataManagerContract;
 import com.example.stanislavdinev.task_list.data.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper implements DataManagerContract {
+public class DatabaseHelper extends SQLiteOpenHelper implements TaskDataManagerContract {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "dbTask";
 

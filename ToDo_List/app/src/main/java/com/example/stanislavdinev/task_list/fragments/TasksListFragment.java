@@ -45,7 +45,7 @@ public class TasksListFragment extends BaseFragment implements TaskAdapter.Liste
                         getActivity()).setFragmentAndAddToBackStack(OpenTaskFragment.newInstance());
             }
         });
-        TasksListPresenter tasksListPresenter = new TasksListPresenter(this, TaskApp.getInstance().getDataManager());
+        TasksListPresenter tasksListPresenter = new TasksListPresenter(this, TaskApp.getInstance().getTaskDataManager());
         tasksListPresenter.loadTasks();
     }
 
